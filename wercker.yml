@@ -5,11 +5,20 @@ services:
 build:
   # The steps that will be executed on build
   steps:
-    # A step that executes `pip install` command
-    - pip-install
+    - install-packages:
+      packages: python3 python3-pip
 
-    # A custom script step, name value is used in the UI
-    # and the code value contains the command that get executed
+    - script:
+      name: setup virtual environment and activate it
+      code: |
+        virtualenv -p /usr/bin/python3 $HOME/py3env
+        source $HOME/py3env
+
+    - script:
+      name: pip install
+      code: |
+        pip install -r requirements.txt
+
     - script:
         name: run django tests
         code: |
