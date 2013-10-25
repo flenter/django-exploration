@@ -27,5 +27,5 @@ build:
     - script:
         name: show python version
         code: |
-            python -v
+            python --version
 
