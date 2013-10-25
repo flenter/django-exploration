@@ -23,3 +23,9 @@ build:
         name: run django tests
         code: |
           python manage.py test
+
+    - script:
+        name: show python version
+        code: |
+            python -v
+
