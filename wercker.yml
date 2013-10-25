@@ -12,7 +12,7 @@ build:
         name: setup virtual environment and activate it
         code: |
           virtualenv -p /usr/bin/python3 $HOME/py3env
-          source $HOME/py3env
+          source $HOME/py3env/bin/activate
 
     - script:
         name: pip install
