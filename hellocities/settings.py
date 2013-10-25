@@ -85,6 +85,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.config(
+        env="WERCKER_POSTGRESQL_URL",
         default='postgres://jacco:@localhost:5432/hellocities'
     )
 }
