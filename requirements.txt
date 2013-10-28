@@ -1,5 +1,4 @@
 -e git+https://github.com/django/django.git@stable/1.6.x#egg=django
--e git+https://github.com/maxmind/geoip-api-python#egg=GeoIP
 gunicorn
 dj-database-url
 dj-static
