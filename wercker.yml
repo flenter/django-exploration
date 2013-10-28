@@ -6,13 +6,8 @@ build:
   # The steps that will be executed on build
   steps:
     - install-packages:
-        packages: python3 python3-dev libgeoip1
+        packages: python3 python3-dev libgeoip1-dev
 
-    # - script:
-    #     name: install tox
-    #     code: |
-    #       sudo pip install tox
-    #       git --version
     - script:
         name: setup virtual environment
         code: |
