@@ -13,11 +13,11 @@ build:
     #     code: |
     #       sudo pip install tox
     #       git --version
-    # - script:
-    #     name: run tox
-    #     code: |
-    #       virtualenv -p /usr/bin/python3 $HOME/py3env
-    #       source $HOME/py3env/bin/activate
+    - script:
+        name: setup virtual environment
+        code: |
+          virtualenv -p /usr/bin/python3 $HOME/py3env
+          source $HOME/py3env/bin/activate
 
     - script:
         name: get geocitylite database
