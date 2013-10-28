@@ -12,6 +12,7 @@ build:
         name: install tox
         code: |
           sudo pip install tox
+          git
     # - script:
     #     name: run tox
     #     code: |
