@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'django.contrib.gis.geoip',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,3 +91,6 @@ DATABASES = {
         default='postgres://jacco:@localhost:5432/hellocities'
     )
 }
+
+GEOIP_PATH = os.path.join(BASE_DIR, "data")
+# print GEOIP_PATH

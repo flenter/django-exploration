@@ -6,26 +6,42 @@ build:
   # The steps that will be executed on build
   steps:
     - install-packages:
-        packages: python3 python3-dev
+        packages: python3 python3-dev geoip
 
     - script:
-        name: setup virtual environment and activate it
+        name: install tox
         code: |
-          virtualenv -p /usr/bin/python3 $HOME/py3env
-          source $HOME/py3env/bin/activate
+          sudo pip install tox
+
+    # - script:
+    #     name: run tox
+    #     code: |
+    #       virtualenv -p /usr/bin/python3 $HOME/py3env
+    #       source $HOME/py3env/bin/activate
+
+    # - script:
+    #     name: get geocitylite database
+    #     code: |
+    #       wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+    #       gunzip GeoLiteCity.dat.gz
+    #       mkdir -p data
+    #       mv GeoLiteCity.dat data
+    # - script:
+    #     name: pip install
+    #     code: |
+    #       pip install -r requirements.txt
+
+    # - script:
+    #     name: run django tests
+    #     code: |
+    #       python manage.py test
+
+    # - script:
+    #     name: show python version
+    #     code: |
+    #         python --version
 
     - script:
-        name: pip install
+        name: run tox
         code: |
-          pip install -r requirements.txt
-
-    - script:
-        name: run django tests
-        code: |
-          python manage.py test
-
-    - script:
-        name: show python version
-        code: |
-            python --version
-
+          tox
