@@ -6,7 +6,7 @@ build:
   # The steps that will be executed on build
   steps:
     - install-packages:
-        packages: python3 python3-dev libgeoip-dev
+        packages: python3 python3-dev
 
     - script:
         name: setup virtual environment
@@ -14,13 +14,13 @@ build:
           virtualenv -p /usr/bin/python3 $HOME/py3env
           source $HOME/py3env/bin/activate
 
-    - script:
-        name: get geocitylite database
-        code: |
-          wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
-          gunzip GeoLiteCity.dat.gz
-          mkdir -p data
-          mv GeoLiteCity.dat data
+    # - script:
+    #     name: get geocitylite database
+    #     code: |
+    #       wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+    #       gunzip GeoLiteCity.dat.gz
+    #       mkdir -p data
+    #       mv GeoLiteCity.dat data
     - script:
         name: pip install
         code: |
