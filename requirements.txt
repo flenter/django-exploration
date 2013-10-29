@@ -4,3 +4,4 @@ dj-database-url
 dj-static
 psycopg2
 django-nose
+geopy
