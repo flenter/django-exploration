@@ -30,6 +30,7 @@ build:
         name: pip install
         code: |
           mkdir -p $WERCKER_CACHE_DIR/pip
+          which pip
           pip install --download $WERCKER_CACHE_DIR/pip -r requirements.txt
           pip install --no-index --find-links=$WERCKER_CACHE_DIR/pip -r requirements.txt
     - script:
