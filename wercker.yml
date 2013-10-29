@@ -26,18 +26,18 @@ build:
     #       gunzip GeoLiteCity.dat.gz
     #       mkdir -p data
     #       mv GeoLiteCity.dat data
-    - script:
-        name: pip install pip-accel
-        code: |
-          pip install pip-accel
-          mkdir $WERCKER_CACHE_DIR/.pip
-          mkdir $WERCKER_CACHE_DIR/.pip-accel
-          ln -s $WERCKER_CACHE_DIR $HOME
-          ln -s $WERCKER_CACHE_DIR/.pip-accel $HOME
+    # - script:
+    #     name: pip install pip-accel
+    #     code: |
+    #       pip install pip-accel
+    #       mkdir $WERCKER_CACHE_DIR/.pip
+    #       mkdir $WERCKER_CACHE_DIR/.pip-accel
+    #       ln -s $WERCKER_CACHE_DIR $HOME
+    #       ln -s $WERCKER_CACHE_DIR/.pip-accel $HOME
     - script:
         name: pip-accel install
         code: |
-          pip-accel install -r requirements.txt
+          pip install -r requirements.txt
     - script:
         name: run django tests
         code: |
