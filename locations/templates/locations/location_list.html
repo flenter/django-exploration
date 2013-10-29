@@ -12,12 +12,6 @@
     <body style="">
         <!-- Add your site or application content here -->
         <h1>Locations:</h1>
-<!--         <ol>
-            {% for object in object %}
-            <li>{{object.name}}</li>
-            {% endfor %}
-        </ol>
- -->
  {% load distance %}
     <table border="1" width="100%">
         <thead>
@@ -33,7 +27,7 @@
             <tr>
                 <td>{{source.name}}</td>
                 {% for destination in object_list %}
-                <td>{{source |km_to:destination}}</td>
+                <td>{{source |km_to:destination|floatformat:2}} km or  {{source |mi_to:destination|floatformat:2}} mi</td>
                 {% endfor %}
             </tr>
             {% endfor %}

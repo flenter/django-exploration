@@ -6,6 +6,8 @@ class Location(models.Model):
     geom = models.PointField()
     objects = models.GeoManager()
 
+    class Meta:
+        ordering = ['name']
     def __unicode__(self):
         return unicode(self.name)
 
