@@ -99,7 +99,7 @@ if os.environ['DATABASE_URL']:
             default='postgis://jacco:@localhost:5432/hellocities'
         )
     }
-    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+    # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 else:
     DATABASES = {
         'default': dj_database_url.config(
