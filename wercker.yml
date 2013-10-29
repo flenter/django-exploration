@@ -30,7 +30,7 @@ build:
         name: pip install
         code: |
           mkdir -p $WERCKER_CACHE_DIR/pip
-          pip install --download $WERCKER_CACHE_DIR/pip --exists-action s -r requirements.txt
+          pip install -r requirements.txt
     - script:
         name: run django tests
         code: |
