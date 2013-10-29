@@ -35,3 +35,9 @@ class DistanceFilterCase(TestCase):
         # print a, b
         result = distance.calc_distance(a, b)
         self.assertEqual(result, 8794.624631776502)
+
+        self.assertRaises(TypeError, distance.calc_distance, a, 1)
+        self.assertRaises(TypeError, distance.calc_distance, 1, b)
+
+        result = distance.calc_distance(b, a)
+        self.assertEqual(result, 8794.624631776502)
