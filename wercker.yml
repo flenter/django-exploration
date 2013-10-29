@@ -27,10 +27,17 @@ build:
     #       mkdir -p data
     #       mv GeoLiteCity.dat data
     - script:
-        name: pip install
+        name: pip install pip-accell
         code: |
-          mkdir -p $WERCKER_CACHE_DIR/pip
-          pip install -r requirements.txt
+          pip install pip-accell
+          mkdir $WERCKER_CACHE_DIR/.pip
+          mkdir $WERCKER_CACHE_DIR/.pip-accell
+          ln -s $WERCKER_CACHE_DIR $HOME
+          ln -s $WERCKER_CACHE_DIR/.pip-accell
+    - script:
+        name: pip-accell install
+        code: |
+          pip-accell install -r requirements.txt
     - script:
         name: run django tests
         code: |
