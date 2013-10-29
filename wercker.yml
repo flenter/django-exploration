@@ -16,7 +16,6 @@ build:
     - script:
         name: setup virtual environment
         code: |
-          sudo easy_install3 pip
           virtualenv -p /usr/bin/python3 $HOME/py3env
           source $HOME/py3env/bin/activate
 
@@ -31,7 +30,6 @@ build:
         name: pip install
         code: |
           mkdir -p $WERCKER_CACHE_DIR/pip
-          pip --version
           pip install --download $WERCKER_CACHE_DIR/pip --exists-action s -r requirements.txt
     - script:
         name: run django tests
