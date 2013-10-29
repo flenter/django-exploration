@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     # 'django.contrib.gis.geoip',
     # 'django_nose',
+    'gunicorn',
     'locations',
 )
 
