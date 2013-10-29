@@ -11,7 +11,7 @@ build:
           export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
 
     - install-packages:
-        packages: python3 python3-dev postgresql-9.3-postgis python3-setuptools
+        packages: python3 python3-dev postgresql-9.3-postgis
 
     - script:
         name: setup virtual environment
@@ -19,36 +19,11 @@ build:
           virtualenv -p /usr/bin/python3 $HOME/py3env
           source $HOME/py3env/bin/activate
 
-    # - script:
-    #     name: get geocitylite database
-    #     code: |
-    #       wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
-    #       gunzip GeoLiteCity.dat.gz
-    #       mkdir -p data
-    #       mv GeoLiteCity.dat data
-    # - script:
-    #     name: pip install pip-accel
-    #     code: |
-    #       pip install pip-accel
-    #       mkdir $WERCKER_CACHE_DIR/.pip
-    #       mkdir $WERCKER_CACHE_DIR/.pip-accel
-    #       ln -s $WERCKER_CACHE_DIR $HOME
-    #       ln -s $WERCKER_CACHE_DIR/.pip-accel $HOME
     - script:
-        name: pip-accel install
+        name: pip install
         code: |
           pip install -r requirements.txt
     - script:
         name: run django tests
         code: |
           python manage.py test
-
-    # - script:
-    #     name: show python version
-    #     code: |
-    #         python --version
-
-    # - script:
-    #     name: run tox
-    #     code: |
-    #       tox
