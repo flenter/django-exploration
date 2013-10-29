@@ -3,5 +3,5 @@ gunicorn
 dj-database-url
 dj-static
 psycopg2
-django-nose
+# django-nose
 geopy

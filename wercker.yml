@@ -34,7 +34,7 @@ build:
     - script:
         name: run django tests
         code: |
-          python manage.py test --with-fixture-bundling
+          python manage.py test
 
     # - script:
     #     name: show python version

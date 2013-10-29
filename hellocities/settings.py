@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.gis',
     # 'django.contrib.gis.geoip',
-    'django_nose',
+    # 'django_nose',
     'locations',
 )
 
@@ -101,4 +101,4 @@ DATABASES = {
 GEOIP_PATH = os.path.join(BASE_DIR, "data")
 # print GEOIP_PATH
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
