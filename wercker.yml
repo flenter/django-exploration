@@ -24,7 +24,7 @@ build:
     - script:
         name: pip install
         code: |
-          pip install -q -e -r requirements.txt
+          pip install -q -r requirements.txt
 
     - script:
         name: run django tests
