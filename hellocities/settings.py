@@ -99,6 +99,8 @@ DATABASES = {
     )
 }
 
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 GEOIP_PATH = os.path.join(BASE_DIR, "data")
 # print GEOIP_PATH
 
