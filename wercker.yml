@@ -33,8 +33,8 @@ build:
           mkdir -p $WERCKER_CACHE_DIR/pip
           which pip
           ls -la $HOME/py3env/bin/
-          pip install --download $WERCKER_CACHE_DIR/pip  --exists-action s -r requirements.txt
-          pip install --no-index --find-links=$WERCKER_CACHE_DIR/pip -r requirements.txt
+          pip3-2 install --download $WERCKER_CACHE_DIR/pip  --exists-action s -r requirements.txt
+          pip3-2 install --no-index --find-links=$WERCKER_CACHE_DIR/pip -r requirements.txt
     - script:
         name: run django tests
         code: |
