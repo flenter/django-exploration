@@ -99,6 +99,7 @@ if os.environ['DATABASE_URL']:
             default='postgis://jacco:@localhost:5432/hellocities'
         )
     }
+    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 else:
     DATABASES = {
         'default': dj_database_url.config(
@@ -107,7 +108,6 @@ else:
         )
     }
 
-# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 GEOIP_PATH = os.path.join(BASE_DIR, "data")
 # print GEOIP_PATH
