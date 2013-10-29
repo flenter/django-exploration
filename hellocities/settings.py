@@ -92,12 +92,20 @@ STATIC_URL = '/static/'
 
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        env="WERCKER_POSTGRESQL_URL",
-        default='postgis://jacco:@localhost:5432/hellocities'
-    )
-}
+if os.environ['DATABASE_URL']:
+    DATABASES = {
+        'default': dj_database_url.config(
+            # env="WERCKER_POSTGRESQL_URL",
+            default='postgis://jacco:@localhost:5432/hellocities'
+        )
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            env="WERCKER_POSTGRESQL_URL",
+            default='postgis://jacco:@localhost:5432/hellocities'
+        )
+    }
 
 # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
