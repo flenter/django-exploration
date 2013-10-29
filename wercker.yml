@@ -11,11 +11,12 @@ build:
           export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
 
     - install-packages:
-        packages: python3 python3-dev postgresql-9.3-postgis
+        packages: python3 python3-dev postgresql-9.3-postgis python3-setuptools
 
     - script:
         name: setup virtual environment
         code: |
+          sudo easy_install3 pip
           virtualenv -p /usr/bin/python3 $HOME/py3env
           source $HOME/py3env/bin/activate
 
