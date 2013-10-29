@@ -5,6 +5,11 @@ services:
 build:
   # The steps that will be executed on build
   steps:
+    - script:
+        name: Check environment variables...
+        code: |
+          export
+
     - install-packages:
         packages: python3 python3-dev postgresql-9.3-postgis
 
