@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     # 'django.contrib.gis.geoip',
     'django_nose',
+    'locations',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -65,6 +66,10 @@ DATABASES = {
     }
 }
 
+TEMPLATE_DIRS = [
+    os.path.join('locations', 'templates')
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
@@ -89,7 +94,7 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(
         env="WERCKER_POSTGRESQL_URL",
-        default='postgres://jacco:@localhost:5432/hellocities'
+        default='postgis://jacco:@localhost:5432/hellocities'
     )
 }
 
