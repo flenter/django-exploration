@@ -29,8 +29,8 @@ build:
     - script:
         name: pip install
         code: |
-          pip install -q -r requirements.txt
-
+          pip install --download $WERCKER_CACHE_DIR/pip -r requirements.txt
+          pip install --no-index --find-links=$WERCKER_CACHE_DIR/pip -r requirements.txt
     - script:
         name: run django tests
         code: |
