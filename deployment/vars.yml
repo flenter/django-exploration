@@ -1,0 +1,9 @@
+project_name: hellocities
+project_root: /var/local/sites/hellocities
+project_repo: git@github.com:flenter/django-exploration.git
+system_packages:
+  - postgresql
+  - postgis
+  - postgresql-server-dev-all
+initfiles:
+  - gunicorn

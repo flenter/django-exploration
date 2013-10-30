@@ -1,0 +1,12 @@
+---
+# file: roles/common/tasks
+- name: Install required system packages.
+  apt: pkg=${item} state=installed update-cache=yes
+  with_items:
+      - build-essential
+      - git
+      - python-setuptools
+      - python-pip
+      - supervisor
+# - name:
+# - name: install

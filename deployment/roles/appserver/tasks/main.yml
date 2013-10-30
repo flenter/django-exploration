@@ -1,0 +1,39 @@
+---
+# file: roles/common/tasks
+- name: Install required system packages.
+  apt: pkg=${item} state=installed update-cache=yes
+  with_items:
+    - libevent-dev
+    - nginx
+    - python-dev
+    - python-virtualenv
+
+- name: Create the project directory.
+  file: state=directory path=${project_root}
+
+- name: Create user.
+  user: home=${project_root}/home/ name=${project_name} state=present
+
+- name: Update the project directory.
+  file: group=${project_name} owner=${project_name} mode=755 state=directory path=${project_root}
+
+- name: Create the code directory.
+  file: group=${project_name} owner=${project_name} mode=755 state=directory path=${project_root}/code/
+
+- name: Change permissions.
+  shell: chown -R ${project_name}:${project_name} ${project_root}
+
+- name: Install nginx configuration file.
+  template: src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/${project_name}
+  notify: restart nginx
+
+- name: Create the project directory.
+  file: state=directory path=${project_root}/run group=${project_name} owner=${project_name}
+
+- name: Install app scripts.
+  template: src=gunicorn.conf.j2 dest=/etc/supervisor/conf.d/${project_name}_gunicorn.conf
+  notify:
+    - restart app
+
+- name: "wait for app started"
+  wait_for: port=8000 delay=5 timeout=30
