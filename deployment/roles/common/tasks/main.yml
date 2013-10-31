@@ -1,12 +1,22 @@
 ---
+
+- name: add key for postgres apt repository
+  apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
+  sudo: yes
+
+- name: add postgres apt repository
+  apt_repository: repo='deb-src http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' state=present
+  sudo: yes
+
 # file: roles/common/tasks
 - name: Install required system packages.
   apt: pkg=${item} state=installed update-cache=yes
+  sudo: yes
   with_items:
       - build-essential
       - git
       - python-setuptools
       - python-pip
       - supervisor
-# - name:
-# - name: install
+      - python-apt
+      - python-pycurl

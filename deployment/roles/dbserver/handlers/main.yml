@@ -1,0 +1,9 @@
+- name: convert database to postgis
+  action: command psql -d $dbname -c "CREATE EXTENSION postgis;"
+  sudo: yes
+  sudo_user: postgres
+
+- name: convert database to postgis topology
+  action: command psql -d $dbname -c "CREATE EXTENSION postgis_topology;"
+  sudo: yes
+  sudo_user: postgres

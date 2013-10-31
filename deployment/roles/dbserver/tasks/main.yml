@@ -1,0 +1,44 @@
+- name: ensure ubuntugis ppa is available
+  apt_repository: repo='ppa:ubuntugis/ppa'
+
+- name: ensure postgres is installed
+  apt: pkg=${item} state=installed update-cache=yes
+  sudo: yes
+  with_items:
+    - postgresql-9.1
+    - postgis
+    - postgresql-9.1-postgis
+    - libpq-dev
+    - postgresql-server-dev-9.1
+    - libgeos-dev
+    - python-psycopg2
+
+
+# - name: Create postgresql user
+#   command: createuser --username=${dbuser} --password=${dbpassword} -h=localhost
+#   sudo: yes
+#   sudo_user: postgres
+
+- name: thing
+  postgresql_user: user=${dbuser} password=${dbpassword} role_attr_flags=CREATEDB,NOSUPERUSER
+  sudo_user: postgres
+  sudo: yes
+
+- name: ensure database is created
+  sudo: yes
+  sudo_user: postgres
+  action: postgresql_db db=$dbname
+  notify:
+    - convert database to postgis
+    - convert database to postgis topology
+
+- name: ensure user has access to database
+  sudo: yes
+  sudo_user: postgres
+  action: postgresql_user db=$dbname user=$dbuser password=$dbpassword priv=ALL
+
+- name: ensure user does not have unnecessary privilege
+  sudo: yes
+  sudo_user: postgres
+  action: postgresql_user user=$dbuser role_attr_flags=NOSUPERUSER,NOCREATEDB
+

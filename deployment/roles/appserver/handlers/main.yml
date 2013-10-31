@@ -7,5 +7,3 @@
   service: name=nginx state=reloaded
   sudo_user: root
 
-- name: restart app
-  action: supervisorctl name=${project_name}_gunicorn state=restarted

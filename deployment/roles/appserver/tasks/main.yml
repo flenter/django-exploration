@@ -1,43 +1,89 @@
 ---
-# file: roles/common/tasks
+- name: ensure ubuntugis ppa is available
+  apt_repository: repo='ppa:ubuntugis/ppa'
+  sudo: yes
+
 - name: Install required system packages.
   apt: pkg=${item} state=installed update-cache=yes
+  sudo: yes
   with_items:
     - libevent-dev
     - nginx
     - python-dev
     - python-virtualenv
+    - python-psycopg2
+    - postgresql-client-9.1
+    - postgis
+    - libgeos-dev
 
 - name: Create the project directory.
+  sudo: yes
   file: state=directory path=${project_root}
 
 - name: Create user.
+  sudo: yes
   user: home=${project_root}/home/ name=${project_name} state=present
 
 - name: Update the project directory.
+  sudo: yes
   file: group=${project_name} owner=${project_name} mode=755 state=directory path=${project_root}
 
-- name: Change permissions.
+- name: Change project directorys' permissions.
+  sudo: yes
   shell: chown -R ${project_name}:${project_name} ${project_root}
 
 - name: Put source files in correct location
+  sudo: yes
   shell: cp -R ${source_location}/* ${project_root}
 
 - name: Remove files from original source location
+  sudo: yes
   shell: find . -name ".*" -exec rm -rf {} \;
   when: source_location_auto_remove == "false"
 
 - name: Install nginx configuration file.
+  sudo: yes
   template: src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/${project_name}
   notify: restart nginx
 
 - name: Create the project directory.
+  sudo: yes
   file: state=directory path=${project_root}/run group=${project_name} owner=${project_name}
 
+- name: Ensure app start script exists.
+  sudo: yes
+  template: src=gunicorn_start.sh.j2 dest=${project_root}/run/gunicorn_start
+
+- name: Set permissions for app script
+  sudo: yes
+  action: file path=${project_root}/run/gunicorn_start mode=0755 owner=root group=root
+
 - name: Install app scripts.
+  sudo: yes
   template: src=gunicorn.conf.j2 dest=/etc/supervisor/conf.d/${project_name}_gunicorn.conf
-  notify:
-    - restart app
+
+- name: ensure required packages are installed.
+  sudo: yes
+  pip: requirements=${project_root}/requirements.txt virtualenv=${project_root}/venv/
+
+- name: sync database
+  django_manage: >
+    command=syncdb
+    app_path=${project_root}
+    settings=${project_name}.settings
+    virtualenv=${project_root}/venv
+
+- name: make sure app is present
+  sudo: yes
+  action: supervisorctl name=${project_name} state=present
+
+- name: app is stopped
+  sudo: yes
+  action: supervisorctl name=${project_name} state=stopped
+
+- name: app is started
+  sudo: yes
+  action: supervisorctl name=${project_name} state=started
 
 - name: "wait for app started"
-  wait_for: port=8000 delay=5 timeout=30
+  wait_for: port=${project_port} delay=5 timeout=30
