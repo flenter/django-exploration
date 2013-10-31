@@ -24,8 +24,8 @@
   shell: cp -R ${source_location}/* ${project_root}
 
 - name: Remove files from original source location
-  shell: rm -rf ${source_location}/*
-  when: ${source_location_auto_remove} == false
+  shell: find . -name ".*" -exec rm -rf {} \;
+  when: source_location_auto_remove == "false"
 
 - name: Install nginx configuration file.
   template: src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/${project_name}
