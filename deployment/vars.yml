@@ -1,6 +1,7 @@
 project_name: hellocities
 project_root: /var/local/sites/hellocities
-project_repo: git@github.com:flenter/django-exploration.git
+source_location: /vagrant
+source_location_auto_remove: false
 system_packages:
   - postgresql
   - postgis
