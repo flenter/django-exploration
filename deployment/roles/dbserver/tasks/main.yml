@@ -5,13 +5,14 @@
   apt: pkg=${item} state=installed update-cache=yes
   sudo: yes
   with_items:
-    - postgresql-9.1
-    - postgis
+    # - postgresql-9.1
+    # - postgis
     - postgresql-9.1-postgis
     - libpq-dev
     - postgresql-server-dev-9.1
     - libgeos-dev
     - python-psycopg2
+    - binutils
 
 
 # - name: Create postgresql user
@@ -19,18 +20,31 @@
 #   sudo: yes
 #   sudo_user: postgres
 
-- name: thing
+- name: Create postgresql user
   postgresql_user: user=${dbuser} password=${dbpassword} role_attr_flags=CREATEDB,NOSUPERUSER
   sudo_user: postgres
   sudo: yes
 
 - name: ensure database is created
+  action: postgresql_db db=$dbname owner=$dbuser encoding='UTF-8' template='template0' lc_ctype='en_US.utf8' lc_collate='en_US.utf8'
+  sudo_user: postgres
+  sudo: yes
+  register: db_created
+  # notify:
+  #   - create postgis extension
+  #   - create postgis_topology extension
+
+- name: create postgis extension
+  command: psql -c "CREATE EXTENSION postgis;"
   sudo: yes
   sudo_user: postgres
-  action: postgresql_db db=$dbname
-  notify:
-    - convert database to postgis
-    - convert database to postgis topology
+  when: db_created.changed
+
+- name: create postgis_topology extension
+  command: psql -c "CREATE EXTENSION postgis_topology;"
+  sudo: yes
+  sudo_user: postgres
+  when: db_created.changed
 
 - name: ensure user has access to database
   sudo: yes

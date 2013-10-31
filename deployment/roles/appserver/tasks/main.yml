@@ -1,4 +1,6 @@
----
+# - name: add apt key for ubuntugis
+#   apt_key: id=314DF160 url=https://ftp-master.debian.org/keys/archive-key-6.0.asc state=present
+
 - name: ensure ubuntugis ppa is available
   apt_repository: repo='ppa:ubuntugis/ppa'
   sudo: yes
