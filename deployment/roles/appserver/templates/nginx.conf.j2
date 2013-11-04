@@ -17,11 +17,11 @@ server {
     error_log /var/log/nginx/{{project_name}}-error.log;
 
     location /static/ {
-        alias   {{project_name}}/static/;
+        alias   {{project_root}}/static/;
     }
 
     location /media/ {
-        alias   {{project_name}}/media/;
+        alias   {{project_root}}/media/;
     }
 
     location / {

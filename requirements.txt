@@ -1,7 +1,6 @@
 -e git+https://github.com/django/django.git@stable/1.6.x#egg=django
 gunicorn
 dj-database-url
-dj-static
 psycopg2
 # django-nose
 geopy

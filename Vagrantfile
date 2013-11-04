@@ -119,6 +119,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     # ansible.verbose = "vvvv"
     ansible.playbook = "deployment/site.yml"
-    # ansible.tags = "fixture"
+    ansible.tags = "static"
   end
 end

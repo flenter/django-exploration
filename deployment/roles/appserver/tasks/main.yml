@@ -48,7 +48,10 @@
 - name: Install nginx configuration file.
   sudo: yes
   template: src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/${project_name}
-  notify: restart nginx
+
+- name: restart nginx
+  service: name=nginx state=restarted
+  sudo: yes
 
 - name: Create the project directory.
   sudo: yes
@@ -60,7 +63,7 @@
 
 - name: Set permissions for app script
   sudo: yes
-  action: file path=${project_root}/run/gunicorn_start mode=0755 owner=root group=root
+  action: file path=${project_root}/run/gunicorn_start mode=0755 owner=${project_name} group=${project_name}
 
 - name: Install app scripts.
   sudo: yes
@@ -73,6 +76,10 @@
 - name: ensure setproctitle is installed.
   sudo: yes
   pip: name=setproctitle virtualenv=${project_root}/venv/
+
+- name: ensure owner of content
+  file: state=directory group=${project_name} owner=${project_name} recurse=yes path=${project_root}
+  sudo: yes
 
 - name: sync database
   django_manage: >
@@ -116,13 +123,32 @@
   sudo: yes
   action: supervisorctl name=${project_name} state=present
 
-- name: app is stopped
-  sudo: yes
-  action: supervisorctl name=${project_name} state=stopped
+# - name: app is stopped
+  # sudo: yes
+  # action: supervisorctl name=${project_name} state=stopped
 
 - name: app is started
   sudo: yes
-  action: supervisorctl name=${project_name} state=started
+  action: supervisorctl name=${project_name} state=restarted
 
+- name: ensure static folder exists
+  file: path=${project_root}/static state=directory owner=${project_name} group=${project_name}
+  sudo: yes
+
+- name: ensure static media exists
+  file: path=${project_root}/media state=directory owner=${project_name} group=${project_name}
+  sudo: yes
+
+- name: collect static
+  django_manage: >
+    command=collectstatic
+    app_path=${project_root}
+    settings=${project_name}.settings
+    virtualenv=${project_root}/venv
+  environment:
+    DATABASE_URL: ${database_url}
+  sudo: yes
+  tags:
+    - static
 # - name: "wait for app started"
 #   wait_for: port=${project_port} delay=5 timeout=30
