@@ -1,10 +1,6 @@
 # - name: add apt key for ubuntugis
 #   apt_key: id=314DF160 url=https://ftp-master.debian.org/keys/archive-key-6.0.asc state=present
 
-- name: ensure ubuntugis ppa is available
-  apt_repository: repo='ppa:ubuntugis/ppa'
-  sudo: yes
-
 - name: Install required system packages.
   apt: pkg=${item} state=installed update-cache=yes
   sudo: yes
@@ -14,8 +10,10 @@
     - python-dev
     - python-virtualenv
     - python-psycopg2
-    - postgresql-client-9.1
-    - postgis
+    - postgresql-server-dev-9.1
+    - binutils
+    - libproj-dev
+    - gdal-bin
     - libgeos-dev
 
 - name: Create the project directory.
@@ -43,6 +41,10 @@
   shell: find . -name ".*" -exec rm -rf {} \;
   when: source_location_auto_remove == "false"
 
+- name: remove default nginx site
+  sudo: yes
+  action: file path=/etc/nginx/sites-enabled/default state=absent
+
 - name: Install nginx configuration file.
   sudo: yes
   template: src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/${project_name}
@@ -68,12 +70,47 @@
   sudo: yes
   pip: requirements=${project_root}/requirements.txt virtualenv=${project_root}/venv/
 
+- name: ensure setproctitle is installed.
+  sudo: yes
+  pip: name=setproctitle virtualenv=${project_root}/venv/
+
 - name: sync database
   django_manage: >
     command=syncdb
     app_path=${project_root}
     settings=${project_name}.settings
     virtualenv=${project_root}/venv
+  environment:
+    DATABASE_URL: ${database_url}
+
+- name: ensure initial_data file was not loaded before
+  stat: path=${project_root}/run/initial_data_loaded
+  register: inital_data
+  tags:
+    - fixture
+
+- name: ensure inital_data was loaded
+  django_manage: >
+    command=loaddata
+    fixtures=${item}
+    app_path=${project_root}
+    settings=${project_name}.settings
+    virtualenv=${project_root}/venv
+  with_items:
+    - data/locations.json
+    - data/users.json
+  environment:
+    DATABASE_URL: ${database_url}
+  when: inital_data.stat.exists == false
+  tags:
+    - fixture
+
+- name: mark initial_data as loaded
+  shell: touch ${project_root}/run/initial_data_loaded
+  sudo: yes
+  tags:
+    - fixture
+  when: inital_data.stat.exists == false
 
 - name: make sure app is present
   sudo: yes
@@ -87,5 +124,5 @@
   sudo: yes
   action: supervisorctl name=${project_name} state=started
 
-- name: "wait for app started"
-  wait_for: port=${project_port} delay=5 timeout=30
+# - name: "wait for app started"
+#   wait_for: port=${project_port} delay=5 timeout=30

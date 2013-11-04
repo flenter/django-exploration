@@ -8,13 +8,13 @@ upstream {{project_name}}_app_server {
 
 server {
 
-    listen   80 default_site;
-    server_name example.com;
+    listen   80 default_server;
+    server_name _;
 
     client_max_body_size 4G;
 
-    access_log /var/log/logs/nginx-{{project_name}}-access.log;
-    error_log /webapps/hello_django/logs/nginx-{{project_name}}-error.log;
+    access_log /var/log/nginx/{{project_name}}-access.log;
+    error_log /var/log/nginx/{{project_name}}-error.log;
 
     location /static/ {
         alias   {{project_name}}/static/;

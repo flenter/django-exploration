@@ -1,11 +1,19 @@
 ---
 
+- name: set locale to ${locale}
+  command: /usr/sbin/update-locale LANG=$locale LC_ALL=${locale}
+  sudo: yes
+
 - name: add key for postgres apt repository
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc state=present
   sudo: yes
 
 - name: add postgres apt repository
   apt_repository: repo='deb-src http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' state=present
+  sudo: yes
+
+- name: ensure ubuntugis ppa is available
+  apt_repository: repo='ppa:ubuntugis/ppa'
   sudo: yes
 
 # file: roles/common/tasks
