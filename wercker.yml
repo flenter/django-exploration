@@ -16,7 +16,7 @@ build:
     - virtualenv
     # :
         # python_location: /usr/bin/python3.2
-        python_location: /usr/bin/python3.2
+        # python_location: /usr/bin/python3.2
     - pip-install
     - script:
         name: run django tests
