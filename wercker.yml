@@ -13,9 +13,9 @@ build:
           python --version
           which pip
           which python
+          ls -la /usr/local/bin
           cat `which pip`
           python --version
-          cat `which python`
 
 
     - install-packages:
