@@ -9,11 +9,14 @@ build:
         name: Check environment variables...
         code: |
           export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
+          ls -la /usr/bin/
+
     - install-packages:
         packages: postgresql-9.3-postgis
     - virtualenv
     # :
         # python_location: /usr/bin/python3.2
+        python_location: /usr/bin/python3.2
     - pip-install
     - script:
         name: run django tests
