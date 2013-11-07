@@ -12,7 +12,9 @@ build:
           export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
           python --version
           which pip
+          which python
           cat `which pip`
+          cat `which python`
 
 
     - install-packages:
