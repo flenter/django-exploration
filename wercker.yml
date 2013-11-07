@@ -17,7 +17,6 @@ build:
           cat `which pip`
           python --version
 
-
     - install-packages:
         packages: postgresql-9.3-postgis
 
