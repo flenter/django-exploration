@@ -15,7 +15,6 @@ build:
         packages: postgresql-9.3-postgis
     - virtualenv:
         python_location: /usr/bin/python3.2
-        # python_location: /usr/bin/python3.2
     - pip-install
     - script:
         name: run django tests
