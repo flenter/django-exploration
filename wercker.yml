@@ -17,7 +17,7 @@ build:
           cat `which pip`
           python --version
           sudo pip install wercker
-          python -m wercker
+          python test.py
           
 
     - install-packages:
