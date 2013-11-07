@@ -16,9 +16,10 @@ build:
           ls -la /usr/local/bin
           cat `which pip`
           python --version
+          sudo which pip
           sudo pip install wercker
           python test.py
-          
+
 
     - install-packages:
         packages: postgresql-9.3-postgis
