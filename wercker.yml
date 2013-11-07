@@ -17,7 +17,7 @@ build:
           cat `which pip`
           python --version
           sudo which pip
-          sudo pip install wercker
+          sudo pip install flask
           python test.py
 
 
