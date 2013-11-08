@@ -28,11 +28,11 @@ deploy:
     - add-to-known_hosts:
         hostname: $TARGET_MACHINE
     - create-file:
-      name: create pem key
-      filename: /home/ubuntu/target_machine.pem
-      content: $PEM_FILE_CONTENT
-      overwrite: true
-      hide-from-log: true
+        name: create pem key
+        filename: /home/ubuntu/target_machine.pem
+        content: $PEM_FILE_CONTENT
+        overwrite: true
+        hide-from-log: true
     - create-file:
         name: create host file for ansible
         filename: /home/ubuntu/hosts
