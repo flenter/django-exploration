@@ -27,9 +27,12 @@ deploy:
   steps:
     - add-to-known_hosts:
         hostname: $TARGET_MACHINE
+    - mktemp:
+        envvar: PRIVATEKEY_PATH
+
     - create-file:
         name: create pem key
-        filename: /home/ubuntu/target_machine.pem
+        filename: $PRIVATEKEY_PATH
         content: $PEM_FILE_CONTENT
         overwrite: true
         hide-from-log: true
@@ -47,9 +50,7 @@ deploy:
         code: |
           chmod 400 /home/ubuntu/target_machine.pem
           cat /home/ubuntu/target_machine.pem
-          # echo $TARGET_MACHINE
-          # ssh $TARGET_MACHINE -i /home/ubuntu/target_machine.pem -v -l ubuntu
-          scp -v wercker.yml -i /home/ubuntu/target_machine.pem ubuntu@$TARGET_MACHINE:/tmp/
+          scp -v wercker.yml -i $PRIVATEKEY_PATH ubuntu@$TARGET_MACHINE:/tmp/
     - virtualenv
     - pip-install:
         name: pip install ansible
