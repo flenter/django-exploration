@@ -45,7 +45,7 @@ deploy:
     - script:
         name: Rsync source files
         code: |
-          scp -r * ubuntu@$TARGET_MACHINE:/tmp/source
+          scp wercker.yml ubuntu@$TARGET_MACHINE:/tmp/
     - virtualenv
     - pip-install:
         name: pip install ansible
