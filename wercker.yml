@@ -67,4 +67,4 @@ deploy:
           # ansible-playbook --version
           # ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
           # ansible-playbook deployment/site.yml -i deployment/hosts
-          ansible-playbook deployment/site.yml -i deployment/hosts --private-key=/home/ubuntu/key.pem -vvvv
+          ansible-playbook deployment/site.yml -i /home/ubuntu/hosts --private-key=/home/ubuntu/key.pem -vvvv
