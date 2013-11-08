@@ -27,25 +27,25 @@ deploy:
   steps:
     - add-to-known_hosts:
         hostname: $TARGET_MACHINE
-    # - create-file:
-    #   name: create pem key
-    #   filename: /home/ubuntu/target_machine.pem
-    #   content: $PEM_FILE_CONTENT
-    #   overwrite: true
-    #   hide-from-log: true
+    - create-file:
+      name: create pem key
+      filename: /home/ubuntu/target_machine.pem
+      content: $PEM_FILE_CONTENT
+      overwrite: true
+      hide-from-log: true
     - create-file:
         name: create host file for ansible
         filename: /home/ubuntu/hosts
         content: $TARGET_MACHINE
         overwrite: true
 # ~/Downloads/django-micro-instance.pem
-    - add-ssh-key:
-        keyname: $PEM_FILE_CONTENT
+    # - add-ssh-key:
+    #    keyname: $PEM_FILE_CONTENT
 
     - script:
         name: Rsync source files
         code: |
-          scp wercker.yml ubuntu@$TARGET_MACHINE:/tmp/
+          scp wercker.yml -i /home/ubuntu/target_machine.pem ubuntu@$TARGET_MACHINE:/tmp/
     - virtualenv
     - pip-install:
         name: pip install ansible
