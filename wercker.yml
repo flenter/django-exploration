@@ -47,8 +47,8 @@ deploy:
         code: |
           chmod 400 /home/ubuntu/target_machine.pem
           cat /home/ubuntu/target_machine.pem
-          echo $TARGET_MACHINE
-          ssh $TARGET_MACHINE -i /home/ubuntu/target_machine.pem -v -l ubuntu
+          # echo $TARGET_MACHINE
+          # ssh $TARGET_MACHINE -i /home/ubuntu/target_machine.pem -v -l ubuntu
           scp wercker.yml -i /home/ubuntu/target_machine.pem ubuntu@$TARGET_MACHINE:/tmp/
     - virtualenv
     - pip-install:
