@@ -35,6 +35,11 @@ deploy:
         content: $PEM_FILE_CONTENT
         overwrite: true
     - create-file:
+        name: write key
+        filename: /home/ubuntu/key.pem
+        content: $PEM_FILE_CONTENT
+        overwrite: true
+    - create-file:
         name: create host file for ansible
         filename: /home/ubuntu/hosts
         content: $TARGET_MACHINE
@@ -60,4 +65,6 @@ deploy:
           cat /home/ubuntu/hosts
           pip freeze
           # ansible-playbook --version
-          ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
+          # ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
+          # ansible-playbook deployment/site.yml -i deployment/hosts
+          ansible-playbook deployment/site.yml -i deployment/hosts --private-key=/home/ubuntu/key.pem -vvvv
