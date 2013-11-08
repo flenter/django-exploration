@@ -63,7 +63,7 @@ deploy:
         code: |
           export ANSIBLE_HOSTS=/home/ubuntu/hosts
           cat /home/ubuntu/hosts
-          chmod 400 /hosts/ubuntu/key.pem
+          chmod 400 /home/ubuntu/key.pem
           pip freeze
           # ansible-playbook --version
           # ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
