@@ -52,7 +52,7 @@ deploy:
     - pip-install:
         name: pip install ansible
         requirements_file: ""
-        packages: "ansible"
+        packages_list: "ansible"
     - script:
         name: run ansible
         code: |
