@@ -58,4 +58,6 @@ deploy:
         code: |
           export ANSIBLE_HOSTS=/home/ubuntu/hosts
           cat /home/ubuntu/hosts
-          ansible-playbook deployment/site.yml --private-key=$PRIVATEKEY_PATH --extra-vars="host=$TARGET_MACHINE"
+          pip freeze
+          ansible-playbook --version
+          ansible deployment/site.yml --private-key=$PRIVATEKEY_PATH --extra-vars="host=$TARGET_MACHINE"
