@@ -4,4 +4,4 @@ dj-database-url
 psycopg2
 # django-nose
 geopy
-pillow
+numpy
