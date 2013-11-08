@@ -49,7 +49,7 @@ deploy:
           cat /home/ubuntu/target_machine.pem
           # echo $TARGET_MACHINE
           # ssh $TARGET_MACHINE -i /home/ubuntu/target_machine.pem -v -l ubuntu
-          scp wercker.yml -i /home/ubuntu/target_machine.pem ubuntu@$TARGET_MACHINE:/tmp/
+          scp -v wercker.yml -i /home/ubuntu/target_machine.pem ubuntu@$TARGET_MACHINE:/tmp/
     - virtualenv
     - pip-install:
         name: pip install ansible
