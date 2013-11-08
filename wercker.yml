@@ -57,4 +57,5 @@ deploy:
         name: run ansible
         code: |
           export ANSIBLE_HOSTS=/home/ubuntu/hosts
+          cat /home/ubuntu/hosts
           ansible-playbook --private-key=$PRIVATEKEY_PATH -i /home/ubuntu/hosts -vvvv  deployment/site.yml
