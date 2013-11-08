@@ -60,4 +60,4 @@ deploy:
           cat /home/ubuntu/hosts
           pip freeze
           # ansible-playbook --version
-          ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment all
+          ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
