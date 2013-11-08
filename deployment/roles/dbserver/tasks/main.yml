@@ -22,7 +22,7 @@
 #     sudo -u postgres ./create_template_postgis-1.5.sh
 
 - name: Create postgresql user
-  postgresql_user: user=${dbuser} password=${dbpassword} role_attr_flags=CREATEDB,NOSUPERUSER
+  action: postgresql_user user=${dbuser} password=${dbpassword} role_attr_flags=CREATEDB,NOSUPERUSER
   sudo_user: postgres
   sudo: yes
 
