@@ -50,7 +50,7 @@
   action: template src=nginx.conf.j2 dest=/etc/nginx/sites-enabled/${project_name}
 
 - name: restart nginx
-  aciton: service name=nginx state=restarted
+  action: service name=nginx state=restarted
   sudo: yes
 
 - name: Create the project directory.
