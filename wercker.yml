@@ -27,7 +27,7 @@ deploy:
   steps:
     - add-to-known_hosts:
         hostname: $TARGET_MACHINE
-- mktemp:
+    - mktemp:
         envvar: PRIVATEKEY_PATH
     - create-file:
         name: write key
