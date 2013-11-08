@@ -27,15 +27,13 @@ deploy:
   steps:
     - add-to-known_hosts:
         hostname: $TARGET_MACHINE
-    - mktemp:
+- mktemp:
         envvar: PRIVATEKEY_PATH
-
     - create-file:
-        name: create pem key
+        name: write key
         filename: $PRIVATEKEY_PATH
         content: $PEM_FILE_CONTENT
         overwrite: true
-        hide-from-log: true
     - create-file:
         name: create host file for ansible
         filename: /home/ubuntu/hosts
