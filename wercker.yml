@@ -48,8 +48,8 @@ deploy:
     - script:
         name: Rsync source files
         code: |
-          ls -la $PRIVATEKEY_PATH
-          scp -v wercker.yml -i $PRIVATEKEY_PATH ubuntu@$TARGET_MACHINE:/tmp/
+          # ls -la $PRIVATEKEY_PATH
+          scp -i $PRIVATEKEY_PATH -v wercker.yml ubuntu@$TARGET_MACHINE:/tmp
     - virtualenv
     - pip-install:
         name: pip install ansible
