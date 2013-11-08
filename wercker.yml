@@ -1,11 +1,11 @@
 box: wercker/python
 services:
   - mies/postgis@0.0.5
+
 # Build definition
 build:
   # The steps that will be executed on build
   steps:
-
     - script:
         name: Check environment variables...
         code: |
@@ -23,3 +23,36 @@ build:
         name: run django tests
         code: |
           python manage.py test
+
+deploy:
+  steps:
+    - add-to-known_hostst:
+        hostname: $TARGET_MACHINE
+    # - create-file:
+    #   name: create pem key
+    #   filename: /home/ubuntu/target_machine.pem
+    #   content: $PEM_FILE_CONTENT
+    #   overwrite: true
+    #   hide-from-log: true
+    - create-file:
+        name: create host file for ansible
+        filename: /home/ubuntu/hosts
+        content: $TARGET_MACHINE
+        overwrite: true
+# ~/Downloads/django-micro-instance.pem
+    - add-ssh-key:
+        keyname: $PEM_FILE_CONTENT
+
+    - script:
+        name: Rsync source files
+        code: |
+          rsync -avz $WERCKER_SOURCE_DIR -e "ssh" ubuntu@$TARGET_MACHINE:/tmp/source
+    - virtualenv
+    - pip-install:
+        name: pip install ansible
+        requirements_file: ""
+        packages: "ansible"
+    - script:
+        name: run ansible
+          export ANSIBLE_HOSTS=/home/ubuntu/hosts
+          ansible-playbook -i /home/ubuntu/target_machine.pem
