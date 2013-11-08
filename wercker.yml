@@ -45,6 +45,7 @@ deploy:
     - script:
         name: Rsync source files
         code: |
+          cat /home/ubunt/target_machine.pem
           scp wercker.yml -i /home/ubuntu/target_machine.pem ubuntu@$TARGET_MACHINE:/tmp/
     - virtualenv
     - pip-install:
