@@ -127,7 +127,7 @@
   sudo: yes
 
 - name: ensure static media exists
-  file: path=${project_root}/media state=directory owner=${project_name} group=${project_name}
+  action: file path=${project_root}/media state=directory owner=${project_name} group=${project_name}
   sudo: yes
 
 - name: collect static
