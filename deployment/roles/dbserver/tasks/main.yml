@@ -36,13 +36,13 @@
   #   - create postgis_topology extension
 
 - name: create postgis extension
-  shell: psql -c "CREATE EXTENSION postgis;" --dbname=$dbname
+  action: command: psql -c "CREATE EXTENSION postgis;" --dbname=$dbname
   sudo: yes
   sudo_user: postgres
   when: db_created.changed
 
 - name: create postgis_topology extension
-  shell: psql -c "CREATE EXTENSION postgis_topology;" --dbname=$dbname
+  action: command: psql -c "CREATE EXTENSION postgis_topology;" --dbname=$dbname
   sudo: yes
   sudo_user: postgres
   when: db_created.changed
