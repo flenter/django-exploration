@@ -25,7 +25,7 @@ build:
 
 deploy:
   steps:
-    - add-to-known_hostst:
+    - add-to-known_host:
         hostname: $TARGET_MACHINE
     # - create-file:
     #   name: create pem key
