@@ -53,7 +53,7 @@ deploy:
         code: |
           # ls -la $PRIVATEKEY_PATH
           scp -i $PRIVATEKEY_PATH -v wercker.yml ubuntu@$TARGET_MACHINE:/tmp
-    - virtualenv
+    # - virtualenv
     - pip-install:
         name: pip install ansible
         requirements_file: ""
