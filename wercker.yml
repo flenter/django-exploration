@@ -53,7 +53,7 @@ deploy:
         code: |
           # ls -la $PRIVATEKEY_PATH
           # scp -i $PRIVATEKEY_PATH -v `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
-          rsync -avz --rsh="ssh -i $PRIVATEKEY_PATH" `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
+          rsync -avz --rsh="ssh -i $PRIVATEKEY_PATH" `pwd`/* ubuntu@$TARGET_MACHINE:/tmp/source
     # - virtualenv
     - pip-install:
         name: pip install ansible
