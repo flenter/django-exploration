@@ -52,7 +52,7 @@ deploy:
         name: Rsync source files
         code: |
           # ls -la $PRIVATEKEY_PATH
-          scp -i $PRIVATEKEY_PATH -v `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
+          # scp -i $PRIVATEKEY_PATH -v `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
           rsync -avz --rsh="ssh $PRIVATEKEY_PATH" `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
     # - virtualenv
     - pip-install:
