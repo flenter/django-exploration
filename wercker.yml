@@ -60,23 +60,11 @@ deploy:
     - script:
         name: Rsync source files
         code: |
-          # ls -la $PRIVATEKEY_PATH
-          # scp -i $PRIVATEKEY_PATH -v `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
-          sudo mv deployment/host_vars /etc/ansible/
           rsync -avz --rsh="ssh -i $PRIVATEKEY_PATH" `pwd`/* ubuntu@$TARGET_MACHINE:$REMOTE_SOURCE_DIR
-          # ssh -i $PRIVATEKEY_PATH -l ubuntu $TARGET_MACHINE  "sudo mv $REMOTE_SOURCE_DIR/deployment/host_vars /etc/ansible/"
-          # ssh -i $PRIVATEKEY_PATH -l ubuntu $TARGET_MACHINE  "mv $REMOTE_SOURCE_DIR/deployment/host_vars /home/ubuntu"
     # - virtualenv
     - script:
         name: run ansible
         code: |
-          # export ANSIBLE_HOSTS=/home/ubuntu/hosts
-          # cat /home/ubuntu/hosts
           chmod 400 /home/ubuntu/key.pem
-          pip freeze
-          # ansible-playbook --version
-          # ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
-          # ansible-playbook deployment/site.yml -i deployment/hosts
           cd deployment
           ansible-playbook site.yml --private-key=/home/ubuntu/key.pem -vvvv --extra-vars "source_location=$REMOTE_SOURCE_DIR source_location_auto_remove=true"
-          # ansible-playbook site.yml -i /home/ubuntu/hosts --private-key=/home/ubuntu/key.pem -vvvv
