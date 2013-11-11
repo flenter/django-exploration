@@ -29,9 +29,9 @@ SECRET_KEY = '$(o402-8gsj$3*epdr)dqb3z1)rlc1i1zl&)#t=-+h$u7mrn5v'
 #         DEBUG = False
 DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -44,8 +44,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    # 'django.contrib.gis.geoip',
-    # 'django_nose',
     'gunicorn',
     'locations',
 )
