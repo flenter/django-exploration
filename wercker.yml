@@ -36,7 +36,7 @@ deploy:
         content: $PEM_FILE_CONTENT
         overwrite: true
     - create-file:
-        name: write key
+        name: write key key.pem
         filename: /home/ubuntu/key.pem
         content: $PEM_FILE_CONTENT
         overwrite: true
