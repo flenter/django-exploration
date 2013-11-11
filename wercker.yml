@@ -78,5 +78,5 @@ deploy:
           # ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
           # ansible-playbook deployment/site.yml -i deployment/hosts
           cd deployment
-          ansible-playbook site.yml --private-key=/home/ubuntu/key.pem -vvvv
+          ansible-playbook site.yml --private-key=/home/ubuntu/key.pem -vvvv --extra-vars "source_location=$REMOTE_SOURCE_DIR"
           # ansible-playbook site.yml -i /home/ubuntu/hosts --private-key=/home/ubuntu/key.pem -vvvv
