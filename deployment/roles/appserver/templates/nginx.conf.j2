@@ -3,7 +3,7 @@ upstream {{project_name}}_app_server {
   # to return a good HTTP response (in case the Unicorn master nukes a
   # single worker for timing out).
 
-  server unix:{{project_root}}/run/gunicorn.sock fail_timeout=60;
+  server unix:/tmp/{{project_name}}.gunicorn.sock fail_timeout=60;
 }
 
 server {
