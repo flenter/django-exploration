@@ -62,7 +62,7 @@ deploy:
         code: |
           # ls -la $PRIVATEKEY_PATH
           # scp -i $PRIVATEKEY_PATH -v `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
-          sudo mv $REMOTE_SOURCE_DIR/deployment/host_vars /etc/ansible/
+          sudo mv deployment/host_vars /etc/ansible/
           rsync -avz --rsh="ssh -i $PRIVATEKEY_PATH" `pwd`/* ubuntu@$TARGET_MACHINE:$REMOTE_SOURCE_DIR
           # ssh -i $PRIVATEKEY_PATH -l ubuntu $TARGET_MACHINE  "sudo mv $REMOTE_SOURCE_DIR/deployment/host_vars /etc/ansible/"
           # ssh -i $PRIVATEKEY_PATH -l ubuntu $TARGET_MACHINE  "mv $REMOTE_SOURCE_DIR/deployment/host_vars /home/ubuntu"
