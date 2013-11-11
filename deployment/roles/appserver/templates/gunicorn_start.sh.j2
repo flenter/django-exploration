@@ -24,4 +24,5 @@ exec venv/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
   --log-level=debug \
-  --bind=127.0.0.1:8000
+  --bind=unix:{{project_root}}/run/gunicorn.sock\
+  --access-logfile /var/log/gunicorn_{{project_name}}__acesss.log
