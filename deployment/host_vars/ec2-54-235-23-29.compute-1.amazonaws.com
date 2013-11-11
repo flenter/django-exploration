@@ -1,2 +1,3 @@
-source_location: /vagrant
+---
+source_location: /tmp/source
 source_location_auto_remove: true
