@@ -1,8 +1,0 @@
-
-- name: restart nginx
-  action: service name=nginx state=restarted
-  sudo: yes
-
-- name: reload nginx
-  action: service name=nginx state=reloaded
-  sudo: yes
