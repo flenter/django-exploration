@@ -1,7 +1,7 @@
 project_name: hellocities
 project_root: /var/local/sites/hellocities
 project_port: 8000
-# source_location: "{{ lookup('env','REMOTE_SOURCE_DIR') }}"
+source_location: "{{ lookup('env','REMOTE_SOURCE_DIR') }}"
 source_location_auto_remove: true
 system_packages:
   - postgresql
