@@ -44,21 +44,17 @@ deploy:
         name: pip install ansible
         requirements_file: ""
         packages_list: "ansible==1.3.4"
-    # - script:
-    #     name:
-    #     code: |
-    #       ls -la /etc
-    #       echo "---------------"
-    #       ls -la /etc/ansible
+
+    - script:
+        name: Create /etc/ansible
+        code: |
+          sudo mkdir -p /etc/ansible
 
     - create-file:
         name: create host file for ansible
-        filename: $WERCKER_SOURCE_DIR/deployment/hosts
+        filename: /etc/ansible/hosts
         content: $TARGET_MACHINE
         overwrite: true
-# ~/Downloads/django-micro-instance.pem
-    # - add-ssh-key:
-       # keyname: $PEM_FILE_CONTENT
 
     - script:
         name: Rsync source files
