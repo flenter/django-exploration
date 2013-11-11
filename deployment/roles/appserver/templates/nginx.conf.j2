@@ -12,6 +12,7 @@ server {
     server_name _;
 
     client_max_body_size 4G;
+    large_client_header_buffers 4 16k;
 
     access_log /var/log/nginx/{{project_name}}-access.log;
     error_log /var/log/nginx/{{project_name}}-error.log;
