@@ -49,7 +49,7 @@ deploy:
         name: Create /etc/ansible
         code: |
           sudo mkdir -p /etc/ansible
-          sudo chmod -r 777 /etc/ansible
+          sudo chmod 777 /etc/ansible
 
     - create-file:
         name: create host file for ansible
