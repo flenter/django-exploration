@@ -54,7 +54,7 @@ deploy:
           # ls -la $PRIVATEKEY_PATH
           # scp -i $PRIVATEKEY_PATH -v `pwd`/* ubuntu@$TARGET_MACHINE:/tmp
           rsync -avz --rsh="ssh -i $PRIVATEKEY_PATH" `pwd`/* ubuntu@$TARGET_MACHINE:$REMOTE_SOURCE_DIR
-          ssh -i $PRIVATEKEY_PATH -l ubuntu $TARGET_MACHINE  "mv $REMOTE_SOURCE_DIR/deployment/host_vars /home/ubuntu"
+          # ssh -i $PRIVATEKEY_PATH -l ubuntu $TARGET_MACHINE  "mv $REMOTE_SOURCE_DIR/deployment/host_vars /home/ubuntu"
     # - virtualenv
     - pip-install:
         name: pip install ansible
@@ -70,4 +70,5 @@ deploy:
           # ansible-playbook --version
           # ansible --private-key=$PRIVATEKEY_PATH -m `pwd`/deployment/site.yml all
           # ansible-playbook deployment/site.yml -i deployment/hosts
-          ansible-playbook deployment/site.yml -i /home/ubuntu/hosts --private-key=/home/ubuntu/key.pem -vvvv
+          cd deployment
+          ansible-playbook site.yml -i /home/ubuntu/hosts --private-key=/home/ubuntu/key.pem -vvvv
