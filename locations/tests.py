@@ -32,7 +32,7 @@ class DistanceFilterCase(TestCase):
 
     def test_find_distance(self):
         a, b = Location.objects.all()
-        # print a, b
+
         result = distance.calc_distance(a, b)
         self.assertEqual(result, 8794.624631776502)
 
