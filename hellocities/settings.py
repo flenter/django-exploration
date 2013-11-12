@@ -31,7 +31,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1', 'ec2-72-44-59-104.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-72-44-59-104.compute-1.amazonaws.com']
 
 
 # Application definition
