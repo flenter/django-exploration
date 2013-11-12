@@ -7,10 +7,10 @@ services:
 build:
   # The steps that will be executed on build
   steps:
-    - script:
-        name: Check environment variables...
-        code: |
-          export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
+    # - script:
+    #     name: Check environment variables...
+    #     code: |
+    #       export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
 
     - install-packages:
         packages: postgresql-client-9.3 postgis
