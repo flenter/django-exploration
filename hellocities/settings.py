@@ -98,21 +98,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 import dj_database_url
 
-if os.environ.get('DATABASE_URL'):
+if os.environ.get('WERCKER_POSTGRESQL_URL'):
+    # DATABASES = {
+    #     'default': dj_database_url.config(
+    #         # env="WERCKER_POSTGRESQL_URL",
+    #         default='postgis://jacco:@localhost:5432/hellocities'
+    #     )
+    # }
+    # DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+# else:
     DATABASES = {
         'default': dj_database_url.config(
-            # env="WERCKER_POSTGRESQL_URL",
+            env="WERCKER_POSTGRESQL_URL",
             default='postgis://jacco:@localhost:5432/hellocities'
         )
     }
-    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-# else:
-#     DATABASES = {
-#         'default': dj_database_url.config(
-#             env="WERCKER_POSTGRESQL_URL",
-#             default='postgis://jacco:@localhost:5432/hellocities'
-#         )
-#     }
 
 
 GEOIP_PATH = os.path.join(BASE_DIR, "data")
