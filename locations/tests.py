@@ -1,5 +1,5 @@
 from django.test import TestCase
-# from django_nose import FastFixtureTestCase as TestCase
+
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import GEOSGeometry
 
