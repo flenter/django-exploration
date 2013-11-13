@@ -27,7 +27,10 @@ build:
         name: run django tests
         code: |
           python manage.py test
-
+    - script:
+        name: fail
+        code: |
+            fail "now"
 deploy:
   steps:
     - add-to-known_hosts:
