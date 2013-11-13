@@ -35,7 +35,7 @@ build:
     - sherzberg/slack-notify:
         token: $SLACK_TOKEN
         subdomain: "wercker"
-        channel: "#general"
+        channel: "general"
 deploy:
   steps:
     - add-to-known_hosts:
