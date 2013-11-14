@@ -36,10 +36,10 @@ build:
         name: run django tests
         code: |
           python manage.py test --liveserver=localhost:8082
-    - script:
-        name: fail
-        code: |
-            fail "now"
+    # - script:
+    #     name: fail
+    #     code: |
+    #         fail "now"
   # after-steps:
   #   - sherzberg/slack-notify:
   #       token: $SLACK_TOKEN
