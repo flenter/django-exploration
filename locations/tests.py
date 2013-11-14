@@ -61,12 +61,12 @@ class MySeleniumTests(LiveServerTestCase):
         cls.selenium.quit()
         super(MySeleniumTests, cls).tearDownClass()
 
-    def test_login(self):
+    def test_locations(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/locations/'))
         print(dir(self.selenium))
         src = self.selenium.page_source
         text_found = re.search(r'text_to_search', src)
         self.assertFalse(text_found)
         text_found = re.search(r'Amsterdam', src)
-        self.assertTrue(False)
+        self.assertTrue(text_found)
     # self.selenium.find_element_by_xpath('//input[@value="Log in"]').click()
