@@ -8,6 +8,16 @@ build:
   # The steps that will be executed on build
   steps:
     - script:
+      name: Enable virtual display
+      code: |-
+        # Start xvfb which gives the context an virtual display
+        # which is required for tests that require an GUI
+        export DISPLAY=:99.0
+        start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
+
+    # Give xvfb time to start. 3 seconds is the default for all xvfb-run commands.
+    sleep 3
+    - script:
         name: Check environment variables...
         code: |
           export WERCKER_POSTGRESQL_URL="postgis://postgres:wercker@$WERCKER_POSTGRESQL_HOST:5432/werckerdb1"
@@ -40,6 +50,7 @@ deploy:
   steps:
     - add-to-known_hosts:
         hostname: $TARGET_MACHINE
+
     - mktemp:
         envvar: PRIVATEKEY_PATH
     - create-file:
