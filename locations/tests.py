@@ -99,6 +99,6 @@ class MySeleniumTests(LiveServerTestCase):
 
     def test_login(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/locations/'))
-        print dir(self.selenium)
+        print(dir(self.selenium))
         self.assertTrue(False)
     # self.selenium.find_element_by_xpath('//input[@value="Log in"]').click()
