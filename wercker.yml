@@ -40,11 +40,11 @@ build:
         name: fail
         code: |
             fail "now"
-  after-steps:
-    - sherzberg/slack-notify:
-        token: $SLACK_TOKEN
-        subdomain: "wercker"
-        channel: "general"
+  # after-steps:
+  #   - sherzberg/slack-notify:
+  #       token: $SLACK_TOKEN
+  #       subdomain: "wercker"
+  #       channel: "general"
 deploy:
   steps:
     - add-to-known_hosts:
