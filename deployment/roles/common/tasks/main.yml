@@ -22,7 +22,6 @@
   sudo: yes
   with_items:
       - build-essential
-      - git
       - python-setuptools
       - python-pip
       - supervisor
