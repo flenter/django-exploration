@@ -2,24 +2,11 @@
   action: apt pkg=${item} state=installed update-cache=yes
   sudo: yes
   with_items:
-    # - postgresql-9.1
-    # - postgis
     - postgresql-9.1-postgis
-    # - libpq-dev
     - postgresql-server-dev-9.1
     - libgeos-dev
     - python-psycopg2
 
-
-# - name: Create postgresql user
-#   command: createuser --username=${dbuser} --password=${dbpassword} -h=localhost
-#   sudo: yes
-#   sudo_user: postgres
-# - name: some django postgis preparations
-#   shell: |
-#     wget https://docs.djangoproject.com/en/dev/_downloads/create_template_postgis-1.5.sh
-#     chmod +x create_template_postgis-1.5.sh
-#     sudo -u postgres ./create_template_postgis-1.5.sh
 
 - name: Create postgresql user
   action: postgresql_user user=${dbuser} password=${dbpassword} role_attr_flags=CREATEDB,NOSUPERUSER
@@ -31,9 +18,6 @@
   sudo_user: postgres
   sudo: yes
   register: db_created
-  # notify:
-  #   - create postgis extension
-  #   - create postgis_topology extension
 
 - name: create postgis extension
   action: command psql -c "CREATE EXTENSION postgis;" --dbname=$dbname
@@ -56,4 +40,3 @@
   sudo: yes
   sudo_user: postgres
   action: postgresql_user user=$dbuser role_attr_flags=NOSUPERUSER,NOCREATEDB
-
