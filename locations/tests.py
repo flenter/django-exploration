@@ -8,7 +8,7 @@ from locations.models import Location
 
 
 class LocationTestCase(TestCase):
-    # fixtures = ["data/locations.json"]
+    fixtures = ["data/locations.json"]
 
     def test_find_cities(self):
         # not really a test... just seeing if there are two items
@@ -28,7 +28,7 @@ class LocationTestCase(TestCase):
 
 
 class DistanceFilterCase(TestCase):
-    # fixtures = ["data/locations.json"]
+    fixtures = ["data/locations.json"]
 
     def test_find_distance(self):
         a, b = Location.objects.all()
@@ -49,7 +49,7 @@ from selenium.webdriver.firefox.webdriver import WebDriver
 
 
 class MySeleniumTests(LiveServerTestCase):
-    # fixtures = ["data/locations.json"]
+    fixtures = ["data/locations.json"]
 
     @classmethod
     def setUpClass(cls):
