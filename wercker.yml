@@ -18,7 +18,6 @@ build:
           sleep 3
           which virtualenv
           pip freeze
-          dpkg --get-selections | grep -v deinstall
     - script:
         name: Check environment variables...
         code: |
