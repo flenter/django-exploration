@@ -24,8 +24,8 @@ build:
     - install-packages:
         packages: postgresql-client-9.3 postgis
 
-    - virtualenv #:
-        # python_location: /usr/bin/python3.2
+    - virtualenv:
+        python_location: /usr/bin/python3.2
     - pip-install
     - script:
         name: show python info
