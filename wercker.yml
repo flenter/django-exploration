@@ -27,7 +27,7 @@ build:
     - virtualenv #:
         # python_location: /usr/bin/python3.2
 
-    - pip-install
+        #    - pip-install
     - script:
         name: show python info
         code: |
