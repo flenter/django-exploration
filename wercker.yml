@@ -28,6 +28,7 @@ build:
         python_location: /usr/bin/python3.2
         install_wheel: false    
     - pip-install
+
     - script:
         name: show python info
         code: |
