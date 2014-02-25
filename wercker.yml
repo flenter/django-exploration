@@ -29,12 +29,15 @@ build:
     - virtualenv:
         #python_location: /usr/bin/python3.2
         install_wheel: false    
-    - pip-install
+    - pip-install:
+        requirements_file: requirements.txt
+        packages_list: "pytest flake8"
 
     - script:
         name: show python info
         code: |
           python --version
+          which py.test
     - script:
         name: run django tests
         code: |
